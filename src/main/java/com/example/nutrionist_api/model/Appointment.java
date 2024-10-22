@@ -1,10 +1,11 @@
 package com.example.nutrionist_api.model;
 
-import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
-import org.springframework.boot.context.properties.bind.Name;
+
 import com.example.nutrionist_api.enums.Gender;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -52,20 +53,20 @@ public class Appointment {
 	this.clientDiagnosis = diagnosis;
 	this.clientEmail = email;
 	this.clientGoal = goal;
-	this.dateTime = dateTime;
+    this.dateTime = dateTime.withZoneSameInstant(ZoneId.of("America/Santiago"));
     }
 
     @PrePersist
     public void onCreate() {
         this.id = UUID.randomUUID().toString();
-        this.createdAt = ZonedDateTime.now(ZoneId.of("America/Santigo"));
+        this.createdAt = ZonedDateTime.now(ZoneId.of("America/Santiago"));
         updatedAt = createdAt; 
         this.completed = false;
     }
 
     @PreUpdate
     public void onUpdate() {
-        updatedAt = ZonedDateTime.now(ZoneId.of("America/Santigo"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("America/Santiago"));
     }
      /* -- Getters -- */
     public String getId() {
@@ -95,11 +96,11 @@ public class Appointment {
     public ZonedDateTime getUpdateDate() {
 	return this.updatedAt;
     }
-    public boolean getCompleted() {
-	return this.completed;
-    }
     public ZonedDateTime getDateTime() {
 	return this.dateTime;
+    }
+    public boolean getCompleted() {
+	return this.completed;
     }
      /* -- Setters -- */
     public void setClientName(String newName) {
@@ -124,7 +125,7 @@ public class Appointment {
 	this.completed = completed;
     }
     public void setDateTime(ZonedDateTime newDate) {
-	this.dateTime = newDate;
+	this.dateTime = newDate.withZoneSameInstant(ZoneId.of("America/Santiago"));
     }
 
 }
