@@ -2,7 +2,6 @@ package com.example.nutrionist_api.utils;
 
 import java.util.regex.Pattern;
 
-import com.example.nutrionist_api.enums.Gender;
 import com.example.nutrionist_api.model.Appointment;
 
 public final class Validation {
@@ -12,7 +11,6 @@ public final class Validation {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
     public static void isNewAppointmentValid(Appointment newAppointment) {
-
             if(isClientNameInvalid(newAppointment.getClientName())) {
                 throw new IllegalArgumentException("Client name cannot be null, empty or contain any other characters than letters");
             }

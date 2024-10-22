@@ -34,9 +34,8 @@ public class AppointmentService {
         Appointment existingAppointment = appointmentRepository.findById(matchId)
             .orElseThrow(() -> new EntityNotFoundException("Appointment not found"));
 
-            updateAppointmentFields(existingAppointment, newAppointment);
-
-           return appointmentRepository.save(existingAppointment);
+        updateAppointmentFields(existingAppointment, newAppointment);
+        return appointmentRepository.save(existingAppointment);
 
     }
 
