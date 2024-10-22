@@ -1,11 +1,8 @@
 package com.example.nutrionist_api.model;
 
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
 import com.example.nutrionist_api.enums.Gender;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
