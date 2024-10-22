@@ -16,16 +16,13 @@ public class AppointmentService {
     public Appointment createAppointment(Appointment newAppointment) {
             return appointmentRepository.save(newAppointment);
     }
-
     public List<Appointment> getAll() {
         List<Appointment> appointments = appointmentRepository.findAll();
         return appointments;
     }
-
     public Optional<Appointment> getOne(String id) {
         return appointmentRepository.findById(id);
     }
-
     public Appointment modifyAppointment(Appointment newAppointment) {
         String matchId = newAppointment.getId();
         Appointment existingAppointment = appointmentRepository.findById(matchId)
@@ -33,9 +30,10 @@ public class AppointmentService {
 
         updateAppointmentFields(existingAppointment, newAppointment);
         return appointmentRepository.save(existingAppointment);
-
     }
-
+    public void deleteById(String id) {
+       appointmentRepository.deleteById(id);
+    }
     private static void updateAppointmentFields(Appointment existingAppointment, Appointment newAppointment) {
         existingAppointment.setClientName(newAppointment.getClientName());
         existingAppointment.setClientAge(newAppointment.getClientAge());
@@ -45,5 +43,4 @@ public class AppointmentService {
         existingAppointment.setClientDiagnosis(newAppointment.getClientDiagnosis());
         existingAppointment.setDateTime(newAppointment.getDateTime());
     }
-    
 }

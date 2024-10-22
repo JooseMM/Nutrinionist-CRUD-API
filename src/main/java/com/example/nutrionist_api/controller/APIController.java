@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -95,6 +96,19 @@ class APIController {
         } catch (Exception e) {
             Response<Appointment> response = new Response<Appointment>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "An error occurred while updating the appointment.", updatedAppointment,
+                    Collections.singletonList(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @DeleteMapping("/deleteAppointment/{id}")
+    public ResponseEntity<Response<String>> deleteById(@Valid @PathVariable String id) {
+        try {
+            appointmentService.deleteById(id);
+            Response<String> response = new Response<String>(HttpStatus.NO_CONTENT.value(), "Data removed succesfully", id, null);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<String> response = new Response<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "An error occurred while updating the appointment.", id,
                     Collections.singletonList(e.getMessage()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
