@@ -1,4 +1,5 @@
 ## To do:
+- Validate the String ID for methods like UPDATE, DELETE AND GET;
 
 # Authentication:
     -JWT
