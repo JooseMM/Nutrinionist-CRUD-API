@@ -1,10 +1,11 @@
 package com.example.nutrionist_api.model;
 
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import com.example.nutrionist_api.enums.Gender;
+import com.example.nutrionist_api.utils.Convertions;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,12 +35,12 @@ public class Appointment {
     private Gender clientSex;
     @Column(name = "client_email", columnDefinition = "VARCHAR(255)", nullable = false)
     private String clientEmail;
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", columnDefinition = "DATETIME(3)", updatable = false)
     private ZonedDateTime createdAt;
-    @Column(name = "updated_at", updatable = true)
+    @Column(name = "updated_at", columnDefinition = "DATETIME(3)", updatable = true)
     private ZonedDateTime updatedAt;
     @Future
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date_time", columnDefinition = "DATETIME(3)", nullable = false)
     private ZonedDateTime dateTime;
     @Column(columnDefinition = "TINYINT(1)", nullable = false)
     private boolean completed;
@@ -53,20 +54,20 @@ public class Appointment {
 	this.clientDiagnosis = diagnosis;
 	this.clientEmail = email;
 	this.clientGoal = goal;
-    this.dateTime = dateTime.withZoneSameInstant(ZoneId.of("America/Santiago"));
+    this.dateTime = dateTime.withZoneSameInstant(ZoneOffset.UTC);
     }
 
     @PrePersist
     public void onCreate() {
         this.id = UUID.randomUUID().toString();
-        this.createdAt = ZonedDateTime.now(ZoneId.of("America/Santiago"));
+        this.createdAt = Convertions.convertZonedDateTimeToMilliseconds(ZonedDateTime.now(ZoneOffset.UTC));
         updatedAt = createdAt; 
         this.completed = false;
     }
 
     @PreUpdate
     public void onUpdate() {
-        updatedAt = ZonedDateTime.now(ZoneId.of("America/Santiago"));
+        updatedAt = Convertions.convertZonedDateTimeToMilliseconds(ZonedDateTime.now(ZoneOffset.UTC));
     }
      /* -- Getters -- */
     public String getId() {
@@ -125,7 +126,6 @@ public class Appointment {
 	this.completed = completed;
     }
     public void setDateTime(ZonedDateTime newDate) {
-	this.dateTime = newDate.withZoneSameInstant(ZoneId.of("America/Santiago"));
+	this.dateTime = newDate.withZoneSameInstant(ZoneOffset.UTC);
     }
-
 }
