@@ -3,10 +3,8 @@ package com.example.nutrionist_api.model;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.UUID;
-
 import com.example.nutrionist_api.enums.Gender;
 import com.example.nutrionist_api.utils.Convertions;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,9 +14,9 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.Future;
 
-
 @Entity
 public class Appointment {
+    @org.hibernate.validator.constraints.UUID
     @Id
     @Column(columnDefinition = "CHAR(36)")
     private String id;
