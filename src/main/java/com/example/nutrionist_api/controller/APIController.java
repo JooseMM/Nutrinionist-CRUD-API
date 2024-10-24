@@ -97,7 +97,7 @@ class APIController {
     public ResponseEntity<Response<Appointment>> updateOne(@Valid @RequestBody Appointment updatedAppointment) {
         try {
             // If the appointment is not valid an exception will be throw
-            com.example.nutrionist_api.utils.Validation.isNewAppointmentValid(updatedAppointment);
+            com.example.nutrionist_api.utils.Validation.isAppointmentUpdateValid(updatedAppointment);
             // update the old appointment
             Appointment updateResult = appointmentService.modifyAppointment(updatedAppointment);
             // setup the response

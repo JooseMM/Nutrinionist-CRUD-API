@@ -1,26 +1,31 @@
 ## To do:
+- Implement dateTime validator
 - Implement the send email logic
+- Implement auth
+- Implement Appointments and Clients Database
 
 # Authentication:
 - JWT
 
 # owner:
-- update a reservation
-- delete a reservation
-- get all reservation
-- get one reservation
+- update an appointment
+- delete an appointment
+- Read all appointment
+- Read one appointment
 
 # client:
-- Create a reservation
-- delete a reservation
-- update a reservation
-- get all reservation
-- get one reservation
+- Read one of his appointments
+- Create an appointment
+- delete one of his appointment
+- update one of his appointment
+- Read all their appointment
 
 
-# reservation info: 
-- name
-- sex
-- age
-- previous diagnostic
-- reservation motive
+# appointment info: 
+- client name
+- client sex
+- client age
+- client previous diagnostic
+- client goals
+- client email
+- appointment datetime

@@ -11,6 +11,24 @@ public final class Validation {
     }
     // validates an vaid appointment object or throw an exception
     public static void isNewAppointmentValid(Appointment newAppointment) {
+        if (isClientNameInvalid(newAppointment.getClientName())) {
+            throw new IllegalArgumentException(
+                    "The client name must be provided. It cannot be null, empty, or contain any characters other than letters (A-Z, a-z).");
+        }
+        if (isClientAgeValid(newAppointment.getClientAge())) {
+            throw new IllegalArgumentException("The client age must be between 1 and 150. It cannot be 0 or negative.");
+        }
+        if (isInvalidEmail(newAppointment.getClientEmail())) {
+            throw new IllegalArgumentException("The client email address is not valid. Please provide a correctly formatted email address.");
+        }
+        if (containsInvalidCharacters(newAppointment.getClientDiagnosis())
+                && containsInvalidCharacters(newAppointment.getClientGoal())) {
+            throw new IllegalArgumentException(
+                    "Diagnosis and goal can only contain letters, numbers, spaces, commas, parentheses, and periods. Please check your input.");
+        }
+    }
+
+    public static void isAppointmentUpdateValid(Appointment newAppointment) {
         if (isUUIDInvalid(newAppointment.getId())) {
             throw new IllegalArgumentException(
                     "The provided ID is not a valid UUID. Please ensure it follows the format: 123e4567-e89b-12d3-a456-426614174000.");
